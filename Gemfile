@@ -10,18 +10,14 @@ gem 'sinatra-contrib'
 # Use Thin for our web server
 gem 'thin'
 
-gem 'faker'
-
 gem 'activesupport'
 gem 'activerecord'
 
 gem 'rake'
 
 gem 'shotgun'
-gem 'bcrypt-ruby'
-# gem 'carrierwave'
-# gem "mini_magick"
 
 group :test do
+  gem 'faker'
   gem 'rspec'
 end

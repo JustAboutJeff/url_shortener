@@ -89,13 +89,13 @@ namespace :db do
   desc "Create the database at #{DB_NAME}"
   task :create do
     puts "Creating database #{DB_NAME} if it doesn't exist..."
-    system("createdb #{DB_NAME}")
+    exec("createdb #{DB_NAME}")
   end
 
   desc "Drop the database at #{DB_NAME}"
-  task :dubstep do
-    puts "WUB WUB WUB WUB\nDropping the database #{DB_NAME}..."
-    system("dropdb #{DB_NAME}")
+  task :drop do
+    puts "Dropping database #{DB_NAME}..."
+    exec("dropdb #{DB_NAME}")
   end
 
   desc "Migrate the database (options: VERSION=x, VERBOSE=false, SCOPE=blog)."
@@ -112,24 +112,9 @@ namespace :db do
     require APP_ROOT.join('db', 'seeds.rb')
   end
 
-  desc "Drop, create, migrate and seed the database"
-  task :fuckit => [:dubstep, :create, :migrate, :seed] do
-    puts "Reset complete!"
-  end
-
-  desc "Create, migrate and seed the database"
-  task :yolo => [:create, :migrate, :seed] do
-    puts "Setup complete!"
-  end
-
   desc "Returns the current schema version number"
   task :version do
     puts "Current version: #{ActiveRecord::Migrator.current_version}"
-  end
-
-  desc "Databse console"
-  task :console do
-    exec "psql -d #{DB_NAME}"
   end
 end
 
@@ -140,10 +125,5 @@ end
 
 desc "Run the specs"
 RSpec::Core::RakeTask.new(:spec)
-
-desc "Putain bordel de merde, fils de pute va te faire foutre"
-task "fuckyou" do
-  require APP_ROOT.join('config','helper.rb')
-end
 
 task :default  => :specs
