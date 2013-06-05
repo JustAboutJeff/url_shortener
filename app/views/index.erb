@@ -5,28 +5,11 @@
     <input type="submit">
   </form>
 
-  <% unless @valid %>
-    <br>
-    <h1>MUST ENTER A VALID URL!</h1>
+  <% if @errors %>
+    <%= erb :_errors, :layout => false %>
   <% end %>
-
-  <% if @valid %>
-    <% if @new_url %>
-    <br>
-      <a href="http://localhost:9393/<%= @new_url.short_url %>"><%= @new_url.short_url %></a>
-    <% end %>
-
-    <% if @url_list %>
-      <br>
-      <ul>
-      <% @url_list.reverse.each do |url| %>
-        <li>
-          <a href="http://localhost:9393/<%= url.short_url %>"><%= url.short_url %></a>
-          <span> <%= url.click_count%> </span>
-          <span> <%= url.long_url%> </span>
-        </li>
-      <% end %>
-    <% end %>
+  <% if @url_list %>
+    <%= erb :_urls, :layout => false %>
   <% end %>
 
 </div>
